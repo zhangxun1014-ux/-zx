@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Admin - Library Information System{% endblock %}
+{% block content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2 class="h5">Books by Category</h2>
+        <table class="table table-sm table-bordered w-auto">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Copies</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category, count in dashboard.books_by_category.items() %}
+                <tr>
+                    <td>{{ category }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2" class="text-muted text-center">No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+        <h2 class="h5">Loans by Month</h2>
+        <table class="table table-sm table-bordered w-auto">
+            <thead>
+            <tr>
+                <th>Month</th>
+                <th>Loan count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for month, count in dashboard.loans_by_month.items() %}
+                <tr>
+                    <td>{{ month }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2" class="text-muted text-center">No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p class="text-muted small">
+Note: to keep the course project simple, this page only shows statistics instead of full CRUD forms for books and users. You can mention this extension point in the “architecture design” and “code development” sections of the report.
+</p>
+{% endblock %}
+

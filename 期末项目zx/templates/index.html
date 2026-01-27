@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Home - Library Information System{% endblock %}
+{% block content %}
+<h1 class="mb-4">System Overview</h1>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Copies</h5>
+                <p class="card-text fs-3">{{ stats.total_books }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Borrowed Copies</h5>
+                <p class="card-text fs-3">{{ stats.borrowed_copies }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Registered Users</h5>
+                <p class="card-text fs-3">{{ stats.user_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Overdue Loans</h5>
+                <p class="card-text fs-3">{{ stats.overdue_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="h4">Latest Books</h2>
+        <ul class="list-group">
+            {% for book in latest_books %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ book.title }} - {{ book.author }}</span>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('book_detail', book_id=book.id) }}">Details</a>
+                </li>
+            {% else %}
+                <li class="list-group-item">No data</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2 class="h4">Latest Loans</h2>
+        <ul class="list-group">
+            {% for loan in latest_loans %}
+                <li class="list-group-item">
+                    Loan #{{ loan.id }}: user {{ loan.user_id }} borrowed book {{ loan.book_id }} on {{ loan.borrow_date }}
+                </li>
+            {% else %}
+                <li class="list-group-item">No loan records</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
