@@ -1,0 +1,107 @@
+[
+  {
+    "id": "M-01",
+    "method": "GET",
+    "path": "/api/books",
+    "body": null,
+    "expected_status": 200,
+    "actual_status": 200,
+    "response": {
+      "books": [
+        {
+          "author": "张三",
+          "available_copies": 5,
+          "category": "计算机",
+          "created_at": "2026-01-27",
+          "id": 1,
+          "isbn": "978730000001",
+          "title": "Python 程序设计入门",
+          "total_copies": 5
+        },
+        {
+          "author": "李四",
+          "available_copies": 3,
+          "category": "计算机",
+          "created_at": "2026-01-27",
+          "id": 2,
+          "isbn": "978730000002",
+          "title": "数据结构与算法分析",
+          "total_copies": 3
+        }
+      ],
+      "categories": [
+        "计算机"
+      ],
+      "page": 1,
+      "page_size": 10,
+      "total": 2,
+      "total_pages": 1
+    }
+  },
+  {
+    "id": "M-02",
+    "method": "POST",
+    "path": "/api/loans",
+    "body": {
+      "book_id": 1
+    },
+    "expected_status": 201,
+    "actual_status": 201,
+    "response": {
+      "loan": {
+        "book_id": 1,
+        "borrow_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "id": 1,
+        "return_date": null,
+        "status": "borrowed",
+        "user_id": 1
+      },
+      "message": "Book borrowed successfully"
+    }
+  },
+  {
+    "id": "M-03",
+    "method": "POST",
+    "path": "/api/loans",
+    "body": {
+      "book_id": "wrong"
+    },
+    "expected_status": 400,
+    "actual_status": 400,
+    "response": {
+      "error": "book_id must be a positive integer"
+    }
+  },
+  {
+    "id": "M-04",
+    "method": "POST",
+    "path": "/api/loans/999/return",
+    "body": null,
+    "expected_status": 404,
+    "actual_status": 404,
+    "response": {
+      "error": "Loan not found"
+    }
+  },
+  {
+    "id": "M-05",
+    "method": "POST",
+    "path": "/api/loans/1/return",
+    "body": null,
+    "expected_status": 200,
+    "actual_status": 200,
+    "response": {
+      "loan": {
+        "book_id": 1,
+        "borrow_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "id": 1,
+        "return_date": "2026-09-15",
+        "status": "returned",
+        "user_id": 1
+      },
+      "message": "Book returned successfully"
+    }
+  }
+]

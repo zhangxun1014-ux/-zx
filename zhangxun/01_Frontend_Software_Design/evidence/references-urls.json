@@ -1,0 +1,104 @@
+[
+  {
+    "number": 1,
+    "author": "WHATWG",
+    "title": "HTML Living Standard",
+    "url": "https://html.spec.whatwg.org/multipage/"
+  },
+  {
+    "number": 2,
+    "author": "MDN contributors",
+    "title": "Using the Fetch API",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch"
+  },
+  {
+    "number": 3,
+    "author": "MDN contributors",
+    "title": "Window localStorage property",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+  },
+  {
+    "number": 4,
+    "author": "MDN contributors",
+    "title": "JavaScript modules",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"
+  },
+  {
+    "number": 5,
+    "author": "MDN contributors",
+    "title": "CSS grid layout",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout"
+  },
+  {
+    "number": 6,
+    "author": "MDN contributors",
+    "title": "Using media queries",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries"
+  },
+  {
+    "number": 7,
+    "author": "MDN contributors",
+    "title": "AbortController",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"
+  },
+  {
+    "number": 8,
+    "author": "MDN contributors",
+    "title": "URLSearchParams",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"
+  },
+  {
+    "number": 9,
+    "author": "MDN contributors",
+    "title": "Client-side form validation",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation"
+  },
+  {
+    "number": 10,
+    "author": "MDN contributors",
+    "title": "URL",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/URL"
+  },
+  {
+    "number": 11,
+    "author": "MDN contributors",
+    "title": "ARIA live regions",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions"
+  },
+  {
+    "number": 12,
+    "author": "MDN contributors",
+    "title": "Cross-Origin Resource Sharing",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+  },
+  {
+    "number": 13,
+    "author": "Microsoft",
+    "title": "Playwright Python documentation",
+    "url": "https://playwright.dev/python/docs/intro"
+  },
+  {
+    "number": 14,
+    "author": "Figma",
+    "title": "Guide to auto layout",
+    "url": "https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout"
+  },
+  {
+    "number": 15,
+    "author": "IETF",
+    "title": "RFC 9110 HTTP Semantics",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110"
+  },
+  {
+    "number": 16,
+    "author": "Python Software Foundation",
+    "title": "http.server \u2014 HTTP servers",
+    "url": "https://docs.python.org/3/library/http.server.html"
+  },
+  {
+    "number": 17,
+    "author": "Ecma International",
+    "title": "ECMAScript Language Specification",
+    "url": "https://tc39.es/ecma262/"
+  }
+]

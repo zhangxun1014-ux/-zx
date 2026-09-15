@@ -1,0 +1,72 @@
+[
+  {
+    "id": "UI-01",
+    "scenario": "Overview loads live API statistics",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-02",
+    "scenario": "Catalogue displays seeded books and stock",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-03",
+    "scenario": "Title search returns one matching book",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-04",
+    "scenario": "Search preferences persist after reload",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-05",
+    "scenario": "Unmatched search shows an empty state",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-06",
+    "scenario": "Book detail view displays ISBN and availability",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-07",
+    "scenario": "Borrow submits JSON and confirms success",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-08",
+    "scenario": "Loan appears with borrowed and due dates",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-09",
+    "scenario": "Return updates the loan state",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-10",
+    "scenario": "Reports show category and month aggregates",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-11",
+    "scenario": "Invalid API URL rejected with a visible message",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-12",
+    "scenario": "Unavailable API shows a recoverable connection error",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-13",
+    "scenario": "Corrected API URL restores the application",
+    "result": "PASS"
+  },
+  {
+    "id": "UI-14",
+    "scenario": "Mobile layout has no page-level horizontal overflow",
+    "result": "PASS"
+  }
+]

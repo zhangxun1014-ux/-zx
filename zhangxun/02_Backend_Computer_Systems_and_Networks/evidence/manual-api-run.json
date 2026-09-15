@@ -1,0 +1,10 @@
+{
+  "captured_at": "2026-09-15T14:04:35+03:00",
+  "transport": "live HTTP against a temporary localhost WSGI server",
+  "server_base_url": "http://127.0.0.1:62372/api",
+  "data_source": "fresh isolated copies of delivered data/books.json, users.json, loans.json",
+  "python": "3.12.14",
+  "flask": "3.1.3",
+  "pillow": "12.3.0",
+  "manual_cases": 5
+}

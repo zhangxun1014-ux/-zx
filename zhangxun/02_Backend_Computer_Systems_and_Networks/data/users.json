@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "示例读者",
+    "role": "reader",
+    "max_loans": 5
+  },
+  {
+    "id": 2,
+    "name": "管理员",
+    "role": "admin",
+    "max_loans": 10
+  }
+]

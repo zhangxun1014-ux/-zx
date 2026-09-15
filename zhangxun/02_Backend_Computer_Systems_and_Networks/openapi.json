@@ -1,0 +1,732 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Library Course API",
+    "version": "1.0.0",
+    "description": "Single-process, UTF-8 JSON-file library demonstration for reader 1."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000/api"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Service health",
+        "responses": {
+          "200": {
+            "description": "Service status and fixed reader identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "summary": "Search and paginate books",
+        "responses": {
+          "200": {
+            "description": "Paginated matching books and available categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookSearch"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid page size, page number, or search text",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 100,
+              "default": ""
+            },
+            "required": false,
+            "description": "Case-insensitive title, author, or ISBN search."
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 80,
+              "default": ""
+            },
+            "required": false,
+            "description": "Exact category after trimming surrounding spaces."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000,
+              "default": 1
+            },
+            "required": false
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 10
+            },
+            "required": false
+          }
+        ]
+      }
+    },
+    "/books/{book_id}": {
+      "get": {
+        "summary": "Book details",
+        "responses": {
+          "200": {
+            "description": "Book fields and copy counts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "book_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/loans": {
+      "get": {
+        "summary": "Reader 1 loans",
+        "responses": {
+          "200": {
+            "description": "Reader 1 loans with book details and overdue flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoanCollection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Reader 1 is missing from the local data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Borrow a book",
+        "responses": {
+          "201": {
+            "description": "Borrowed loan and confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BorrowResult"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "URL of the new loan",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON body or book_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book or reader does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Stock exhausted or reader limit reached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request body exceeds the 16 KiB limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "JSON content type required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "book_id"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "book_id": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/loans/{loan_id}": {
+      "get": {
+        "summary": "Loan details",
+        "responses": {
+          "200": {
+            "description": "Reader 1 loan with book details and overdue flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoanView"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Reader loan does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "loan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/loans/{loan_id}/return": {
+      "post": {
+        "summary": "Return a loan",
+        "responses": {
+          "200": {
+            "description": "Returned loan and confirmation; repeat returns remain successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReturnResult"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Loan belongs to another reader",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Loan or its book does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "loan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/stats": {
+      "get": {
+        "summary": "Library summary",
+        "responses": {
+          "200": {
+            "description": "Current collection and circulation totals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/dashboard": {
+      "get": {
+        "summary": "Aggregate reports",
+        "responses": {
+          "200": {
+            "description": "Copy totals by category and loans by month",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dashboard"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "summary": "API specification",
+        "responses": {
+          "200": {
+            "description": "This machine-readable OpenAPI document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIDocument"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "required": [
+          "status",
+          "mode",
+          "reader_id"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok"
+            ]
+          },
+          "mode": {
+            "type": "string"
+          },
+          "reader_id": {
+            "type": "integer",
+            "enum": [
+              1
+            ]
+          }
+        }
+      },
+      "Book": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "author",
+          "isbn",
+          "category",
+          "total_copies",
+          "available_copies",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "total_copies": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "available_copies": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "BookSearch": {
+        "type": "object",
+        "required": [
+          "books",
+          "page",
+          "page_size",
+          "total",
+          "total_pages",
+          "categories"
+        ],
+        "properties": {
+          "books": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Book"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "total_pages": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Loan": {
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "book_id",
+          "borrow_date",
+          "due_date",
+          "return_date",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "user_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "book_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "borrow_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "return_date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "borrowed",
+              "returned"
+            ]
+          }
+        }
+      },
+      "LoanView": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Loan"
+          },
+          {
+            "type": "object",
+            "required": [
+              "book_title",
+              "book_author",
+              "is_overdue"
+            ],
+            "properties": {
+              "book_title": {
+                "type": "string"
+              },
+              "book_author": {
+                "type": "string"
+              },
+              "is_overdue": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "LoanCollection": {
+        "type": "object",
+        "required": [
+          "loans"
+        ],
+        "properties": {
+          "loans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoanView"
+            }
+          }
+        }
+      },
+      "BorrowResult": {
+        "type": "object",
+        "required": [
+          "message",
+          "loan"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "loan": {
+            "$ref": "#/components/schemas/Loan"
+          }
+        }
+      },
+      "ReturnResult": {
+        "type": "object",
+        "required": [
+          "message",
+          "loan"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "loan": {
+            "$ref": "#/components/schemas/Loan"
+          }
+        }
+      },
+      "Stats": {
+        "type": "object",
+        "required": [
+          "total_books",
+          "borrowed_copies",
+          "user_count",
+          "overdue_count"
+        ],
+        "properties": {
+          "total_books": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "borrowed_copies": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "user_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "overdue_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "StatsResult": {
+        "type": "object",
+        "required": [
+          "stats"
+        ],
+        "properties": {
+          "stats": {
+            "$ref": "#/components/schemas/Stats"
+          }
+        }
+      },
+      "Dashboard": {
+        "type": "object",
+        "required": [
+          "books_by_category",
+          "loans_by_month"
+        ],
+        "properties": {
+          "books_by_category": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "loans_by_month": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "OpenAPIDocument": {
+        "type": "object",
+        "required": [
+          "openapi",
+          "info",
+          "servers",
+          "paths",
+          "components"
+        ],
+        "properties": {
+          "openapi": {
+            "type": "string"
+          },
+          "info": {
+            "type": "object"
+          },
+          "servers": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "paths": {
+            "type": "object"
+          },
+          "components": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

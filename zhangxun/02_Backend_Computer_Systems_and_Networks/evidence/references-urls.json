@@ -1,0 +1,104 @@
+[
+  {
+    "number": 1,
+    "author": "Pallets Projects",
+    "title": "Flask documentation",
+    "url": "https://flask.palletsprojects.com/en/stable/"
+  },
+  {
+    "number": 2,
+    "author": "Pallets Projects",
+    "title": "Testing Flask Applications",
+    "url": "https://flask.palletsprojects.com/en/stable/testing/"
+  },
+  {
+    "number": 3,
+    "author": "Python Software Foundation",
+    "title": "json \u2014 JSON encoder and decoder",
+    "url": "https://docs.python.org/3/library/json.html"
+  },
+  {
+    "number": 4,
+    "author": "Python Software Foundation",
+    "title": "os \u2014 Miscellaneous operating system interfaces",
+    "url": "https://docs.python.org/3/library/os.html"
+  },
+  {
+    "number": 5,
+    "author": "Python Software Foundation",
+    "title": "datetime \u2014 Basic date and time types",
+    "url": "https://docs.python.org/3/library/datetime.html"
+  },
+  {
+    "number": 6,
+    "author": "IETF",
+    "title": "RFC 9110 HTTP Semantics",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110"
+  },
+  {
+    "number": 7,
+    "author": "IETF",
+    "title": "RFC 8259 The JSON Data Interchange Format",
+    "url": "https://www.rfc-editor.org/rfc/rfc8259"
+  },
+  {
+    "number": 8,
+    "author": "pytest developers",
+    "title": "pytest documentation",
+    "url": "https://docs.pytest.org/en/stable/"
+  },
+  {
+    "number": 9,
+    "author": "pytest-cov developers",
+    "title": "pytest-cov documentation",
+    "url": "https://pytest-cov.readthedocs.io/en/latest/"
+  },
+  {
+    "number": 10,
+    "author": "Ned Batchelder and contributors",
+    "title": "Coverage.py documentation",
+    "url": "https://coverage.readthedocs.io/en/latest/"
+  },
+  {
+    "number": 11,
+    "author": "OpenAPI Initiative",
+    "title": "OpenAPI Specification 3.0.3",
+    "url": "https://spec.openapis.org/oas/v3.0.3.html"
+  },
+  {
+    "number": 12,
+    "author": "Flask-CORS contributors",
+    "title": "Flask-CORS documentation",
+    "url": "https://flask-cors.readthedocs.io/en/latest/"
+  },
+  {
+    "number": 13,
+    "author": "Python Software Foundation",
+    "title": "threading \u2014 Thread-based parallelism",
+    "url": "https://docs.python.org/3/library/threading.html"
+  },
+  {
+    "number": 14,
+    "author": "Python Software Foundation",
+    "title": "pathlib \u2014 Object-oriented filesystem paths",
+    "url": "https://docs.python.org/3/library/pathlib.html"
+  },
+  {
+    "number": 15,
+    "author": "Pallets Projects",
+    "title": "Werkzeug documentation",
+    "url": "https://werkzeug.palletsprojects.com/en/stable/"
+  },
+  {
+    "number": 16,
+    "author": "Python Software Foundation",
+    "title": "concurrent.futures \u2014 Launching parallel tasks",
+    "url": "https://docs.python.org/3/library/concurrent.futures.html"
+  },
+  {
+    "number": 17,
+    "author": "Roy Thomas Fielding",
+    "title": "Architectural Styles and the Design of Network-based Software Architectures, Chapter 5",
+    "url": "https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm"
+  }
+]
